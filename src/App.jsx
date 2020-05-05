@@ -28,11 +28,18 @@ class App extends React.Component {
       })
   }
 
+  setContacts = (contacts) => {
+    this.setState(() => ({ filteredContacts: contacts }))
+  }
+
   render() {
     return (
       <React.Fragment>
         <Topbar />
-        <Filters />
+        <Filters
+          allContacts={this.state.allContacts}
+          setContacts={this.setContacts}
+        />
         <Contacts contacts={this.state.filteredContacts} />
       </React.Fragment>
     )

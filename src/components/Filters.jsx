@@ -1,6 +1,26 @@
 import React from 'react'
 
 class Filters extends React.Component {
+  state = {
+    searchString: '',
+  }
+
+  filterBySearch = (e) => {
+    e.persist()
+    const inputValue = e.target.value
+    this.setState(() => ({
+      searchString: inputValue,
+    }))
+
+    const { allContacts, setContacts } = this.props
+
+    const filteredContacts = allContacts.filter((contact) =>
+      contact.name.toLowerCase().includes(inputValue.toLowerCase())
+    )
+
+    setContacts(filteredContacts)
+  }
+
   render() {
     return (
       <div className="container">
@@ -10,6 +30,8 @@ class Filters extends React.Component {
               type="text"
               className="filters__search__input"
               placeholder="Pesquisar"
+              value={this.state.searchString}
+              onChange={(e) => this.filterBySearch(e)}
             />
 
             <button className="filters__search__icon">
