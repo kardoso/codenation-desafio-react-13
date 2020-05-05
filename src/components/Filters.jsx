@@ -25,7 +25,7 @@ class Filters extends React.Component {
   }
 
   orderByString = (property) => {
-    const { allContacts, setContacts } = this.props
+    const { allContacts, filteredContacts, setContacts } = this.props
     const contacts = allContacts.sort(function (a, b) {
       if (a[property] < b[property]) {
         return -1
@@ -36,16 +36,20 @@ class Filters extends React.Component {
       return 0
     })
 
-    setContacts(contacts)
+    setContacts(
+      contacts.filter((contact) => filteredContacts.includes(contact))
+    )
   }
 
   orderByAdmissionDate = () => {
-    const { allContacts, setContacts } = this.props
+    const { allContacts, filteredContacts, setContacts } = this.props
     const contacts = allContacts.sort(function (a, b) {
       return new Date(b.admissionDate) - new Date(a.admissionDate)
     })
 
-    setContacts(contacts)
+    setContacts(
+      contacts.filter((contact) => filteredContacts.includes(contact))
+    )
   }
 
   changeButtonIndex = (index) => {

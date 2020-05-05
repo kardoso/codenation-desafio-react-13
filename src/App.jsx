@@ -38,6 +38,7 @@ class App extends React.Component {
         <Topbar />
         <Filters
           allContacts={this.state.allContacts}
+          filteredContacts={this.state.filteredContacts}
           setContacts={this.setContacts}
         />
         <Contacts contacts={this.state.filteredContacts} />
