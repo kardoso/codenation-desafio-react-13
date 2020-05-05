@@ -1,8 +1,11 @@
 import React from 'react'
 
+import FilterButton from './FilterButton'
+
 class Filters extends React.Component {
   state = {
     searchString: '',
+    activeButtonIndex: null,
   }
 
   filterBySearch = (e) => {
@@ -45,6 +48,11 @@ class Filters extends React.Component {
     setContacts(contacts)
   }
 
+  changeButtonIndex = (index) => {
+    this.setState({ activeButtonIndex: index })
+    console.log(index)
+  }
+
   render() {
     return (
       <div className="container">
@@ -63,37 +71,51 @@ class Filters extends React.Component {
             </button>
           </div>
 
-          <button
-            className="filters__item is-selected"
-            onClick={() => this.orderByString('name')}
-          >
-            Nome <i className="fas fa-sort-down" />
-          </button>
-
-          <button
-            className="filters__item"
-            onClick={() => this.orderByString('country')}
-          >
-            País <i className="fas fa-sort-down" />
-          </button>
-
-          <button
-            className="filters__item"
-            onClick={() => this.orderByString('company')}
-          >
-            Empresa <i className="fas fa-sort-down" />
-          </button>
-
-          <button
-            className="filters__item"
-            onClick={() => this.orderByString('department')}
-          >
-            Departamento <i className="fas fa-sort-down" />
-          </button>
-
-          <button className="filters__item" onClick={this.orderByAdmissionDate}>
-            Data de admissão <i className="fas fa-sort-down" />
-          </button>
+          <FilterButton
+            index={0}
+            isActive={this.state.activeButtonIndex === 0}
+            onClick={() => {
+              this.orderByString('name')
+              this.changeButtonIndex(0)
+            }}
+            text="Nome"
+          />
+          <FilterButton
+            index={1}
+            isActive={this.state.activeButtonIndex === 1}
+            onClick={() => {
+              this.orderByString('country')
+              this.changeButtonIndex(1)
+            }}
+            text="País"
+          />
+          <FilterButton
+            index={2}
+            isActive={this.state.activeButtonIndex === 2}
+            onClick={() => {
+              this.orderByString('company')
+              this.changeButtonIndex(2)
+            }}
+            text="Empresa"
+          />
+          <FilterButton
+            index={3}
+            isActive={this.state.activeButtonIndex === 3}
+            onClick={() => {
+              this.orderByString('department')
+              this.changeButtonIndex(3)
+            }}
+            text="Departamento"
+          />
+          <FilterButton
+            index={4}
+            isActive={this.state.activeButtonIndex === 4}
+            onClick={() => {
+              this.orderByAdmissionDate()
+              this.changeButtonIndex(4)
+            }}
+            text="Data de admissão"
+          />
         </section>
       </div>
     )
