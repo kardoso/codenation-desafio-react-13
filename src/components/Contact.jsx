@@ -12,7 +12,7 @@ class Contact extends React.Component {
       avatar,
     } = this.props.data
     return (
-      <article className="contact">
+      <article className="contact" data-testid="contact">
         <span className="contact__avatar">
           <img src={avatar} alt="UserAvatar" />
         </span>

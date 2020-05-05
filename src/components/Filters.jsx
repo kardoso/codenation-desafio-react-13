@@ -27,8 +27,12 @@ class Filters extends React.Component {
   orderByString = (property) => {
     const { allContacts, filteredContacts, setContacts } = this.props
     const contacts = allContacts.sort(function (a, b) {
-      if (a[property] < b[property]) { return -1 }
-      if (a[property] > b[property]) { return 1 }
+      if (a[property] < b[property]) {
+        return -1
+      }
+      if (a[property] > b[property]) {
+        return 1
+      }
       return 0
     })
 
@@ -59,7 +63,7 @@ class Filters extends React.Component {
       { property: null, name: 'Data de admissão' },
     ]
     return (
-      <div className="container">
+      <div className="container" data-testid="filters">
         <section className="filters">
           <div className="filters__search">
             <input
@@ -74,9 +78,9 @@ class Filters extends React.Component {
               <i className="fa fa-search" />
             </button>
           </div>
-
           {buttons.map((button, index) => (
             <FilterButton
+              key={index}
               index={index}
               isActive={this.state.activeButtonIndex === index}
               onClick={() => {
