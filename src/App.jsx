@@ -18,8 +18,8 @@ class App extends React.Component {
     this.getInitialData()
   }
 
-  getInitialData = () => {
-    fetch(apiURL)
+  getInitialData = async () => {
+    await fetch(apiURL)
       .then((response) => {
         return response.json()
       })
