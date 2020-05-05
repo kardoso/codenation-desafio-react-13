@@ -21,58 +21,13 @@ class Filters extends React.Component {
     setContacts(filteredContacts)
   }
 
-  orderByName = () => {
+  orderByString = (property) => {
     const { allContacts, setContacts } = this.props
     const contacts = allContacts.sort(function (a, b) {
-      if (a.name < b.name) {
+      if (a[property] < b[property]) {
         return -1
       }
-      if (a.name > b.name) {
-        return 1
-      }
-      return 0
-    })
-
-    setContacts(contacts)
-  }
-
-  orderByCountry = () => {
-    const { allContacts, setContacts } = this.props
-    const contacts = allContacts.sort(function (a, b) {
-      if (a.country < b.country) {
-        return -1
-      }
-      if (a.country > b.country) {
-        return 1
-      }
-      return 0
-    })
-
-    setContacts(contacts)
-  }
-
-  orderByCompany = () => {
-    const { allContacts, setContacts } = this.props
-    const contacts = allContacts.sort(function (a, b) {
-      if (a.company < b.company) {
-        return -1
-      }
-      if (a.company > b.company) {
-        return 1
-      }
-      return 0
-    })
-
-    setContacts(contacts)
-  }
-
-  orderByDepartment = () => {
-    const { allContacts, setContacts } = this.props
-    const contacts = allContacts.sort(function (a, b) {
-      if (a.department < b.department) {
-        return -1
-      }
-      if (a.department > b.department) {
+      if (a[property] > b[property]) {
         return 1
       }
       return 0
@@ -110,20 +65,29 @@ class Filters extends React.Component {
 
           <button
             className="filters__item is-selected"
-            onClick={this.orderByName}
+            onClick={() => this.orderByString('name')}
           >
             Nome <i className="fas fa-sort-down" />
           </button>
 
-          <button className="filters__item" onClick={this.orderByCountry}>
+          <button
+            className="filters__item"
+            onClick={() => this.orderByString('country')}
+          >
             País <i className="fas fa-sort-down" />
           </button>
 
-          <button className="filters__item" onClick={this.orderByCompany}>
+          <button
+            className="filters__item"
+            onClick={() => this.orderByString('company')}
+          >
             Empresa <i className="fas fa-sort-down" />
           </button>
 
-          <button className="filters__item" onClick={this.orderByDepartment}>
+          <button
+            className="filters__item"
+            onClick={() => this.orderByString('department')}
+          >
             Departamento <i className="fas fa-sort-down" />
           </button>
 
