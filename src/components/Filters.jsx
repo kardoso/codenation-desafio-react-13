@@ -27,12 +27,8 @@ class Filters extends React.Component {
   orderByString = (property) => {
     const { allContacts, filteredContacts, setContacts } = this.props
     const contacts = allContacts.sort(function (a, b) {
-      if (a[property] < b[property]) {
-        return -1
-      }
-      if (a[property] > b[property]) {
-        return 1
-      }
+      if (a[property] < b[property]) { return -1 }
+      if (a[property] > b[property]) { return 1 }
       return 0
     })
 
@@ -55,6 +51,13 @@ class Filters extends React.Component {
   changeButtonIndex = (index) => this.setState({ activeButtonIndex: index })
 
   render() {
+    const buttons = [
+      { property: 'name', name: 'Nome' },
+      { property: 'country', name: 'País' },
+      { property: 'company', name: 'Empresa' },
+      { property: 'department', name: 'Departamento' },
+      { property: null, name: 'Data de admissão' },
+    ]
     return (
       <div className="container">
         <section className="filters">
@@ -72,51 +75,19 @@ class Filters extends React.Component {
             </button>
           </div>
 
-          <FilterButton
-            index={0}
-            isActive={this.state.activeButtonIndex === 0}
-            onClick={() => {
-              this.orderByString('name')
-              this.changeButtonIndex(0)
-            }}
-            text="Nome"
-          />
-          <FilterButton
-            index={1}
-            isActive={this.state.activeButtonIndex === 1}
-            onClick={() => {
-              this.orderByString('country')
-              this.changeButtonIndex(1)
-            }}
-            text="País"
-          />
-          <FilterButton
-            index={2}
-            isActive={this.state.activeButtonIndex === 2}
-            onClick={() => {
-              this.orderByString('company')
-              this.changeButtonIndex(2)
-            }}
-            text="Empresa"
-          />
-          <FilterButton
-            index={3}
-            isActive={this.state.activeButtonIndex === 3}
-            onClick={() => {
-              this.orderByString('department')
-              this.changeButtonIndex(3)
-            }}
-            text="Departamento"
-          />
-          <FilterButton
-            index={4}
-            isActive={this.state.activeButtonIndex === 4}
-            onClick={() => {
-              this.orderByAdmissionDate()
-              this.changeButtonIndex(4)
-            }}
-            text="Data de admissão"
-          />
+          {buttons.map((button, index) => (
+            <FilterButton
+              index={index}
+              isActive={this.state.activeButtonIndex === index}
+              onClick={() => {
+                button.property !== null
+                  ? this.orderByString(button.property)
+                  : this.orderByAdmissionDate()
+                this.changeButtonIndex(index)
+              }}
+              text={button.name}
+            />
+          ))}
         </section>
       </div>
     )
