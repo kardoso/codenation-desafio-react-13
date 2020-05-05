@@ -1,7 +1,11 @@
 import React from 'react'
 
+import Contact from './Contact'
+
 class Contacts extends React.Component {
   render() {
+    let { contacts } = this.props
+    contacts.forEach((c) => console.log(c))
     return (
       <div className="container">
         <section className="contacts">
@@ -14,6 +18,9 @@ class Contacts extends React.Component {
             <span className="contact__data">Empresa</span>
             <span className="contact__data">Departamento</span>
           </article>
+          {contacts.map((contact) => (
+            <Contact key={contact.id} data={contact} />
+          ))}
         </section>
       </div>
     )
