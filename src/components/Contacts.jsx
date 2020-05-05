@@ -6,7 +6,7 @@ class Contacts extends React.Component {
   render() {
     let { contacts } = this.props
     return (
-      <div className="container">
+      <div className="container" data-testid="contacts">
         <section className="contacts">
           <article className="contact">
             <span className="contact__avatar" />
@@ -17,9 +17,11 @@ class Contacts extends React.Component {
             <span className="contact__data">Empresa</span>
             <span className="contact__data">Departamento</span>
           </article>
-          {contacts.map((contact) => (
-            <Contact key={contact.id} data={contact} />
-          ))}
+          {contacts
+            ? contacts.map((contact) => (
+                <Contact key={contact.id} data={contact} />
+              ))
+            : null}
         </section>
       </div>
     )
