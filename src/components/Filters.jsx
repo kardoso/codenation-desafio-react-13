@@ -52,10 +52,7 @@ class Filters extends React.Component {
     )
   }
 
-  changeButtonIndex = (index) => {
-    this.setState({ activeButtonIndex: index })
-    console.log(index)
-  }
+  changeButtonIndex = (index) => this.setState({ activeButtonIndex: index })
 
   render() {
     return (

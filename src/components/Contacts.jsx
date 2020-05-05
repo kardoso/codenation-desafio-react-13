@@ -5,7 +5,6 @@ import Contact from './Contact'
 class Contacts extends React.Component {
   render() {
     let { contacts } = this.props
-    contacts.forEach((c) => console.log(c))
     return (
       <div className="container">
         <section className="contacts">
