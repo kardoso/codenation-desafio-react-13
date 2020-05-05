@@ -6,13 +6,34 @@ import Topbar from './components/Topbar'
 import Filters from './components/Filters'
 import Contacts from './components/Contacts'
 
+const apiURL = 'https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts'
+
 class App extends React.Component {
+  state = {
+    allContacts: [],
+    filteredContacts: [],
+  }
+
+  componentDidMount() {
+    this.getInitialData()
+  }
+
+  getInitialData = () => {
+    fetch(apiURL)
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        this.setState(() => ({ allContacts: data, filteredContacts: data }))
+      })
+  }
+
   render() {
     return (
       <React.Fragment>
         <Topbar />
         <Filters />
-        <Contacts />
+        <Contacts contacts={this.state.filteredContacts} />
       </React.Fragment>
     )
   }
